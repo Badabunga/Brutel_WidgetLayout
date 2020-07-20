@@ -1,0 +1,221 @@
+﻿<Page
+    x:Class="WidgetLayout.View.WidgetView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WidgetLayout.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:selec="using:WidgetLayout.XAML.Templates.Selector"
+    xmlns:dto="using:WidgetLayout.Dto.Page.WidgetPage"
+    xmlns:layout="using:WidgetLayout.XAML.Layouts"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    MinWidth="100">
+
+    <Page.Resources>
+
+        <Style x:Key="Title" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="Info" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        </Style>
+
+        <Style x:Key="Header" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontStyle" Value="Oblique"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <DataTemplate x:Key="WorkItemTemplate" x:DataType="dto:WorkItemDto">
+
+            <Grid RowSpacing="10" MinWidth="500" MaxWidth="900" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Arbeitsobjekt" Style="{StaticResource Header}"/>
+                    <Border BorderBrush="Black" BorderThickness="0 0 0 5" />
+                </StackPanel>
+
+
+                <Grid Grid.Row="1" ColumnSpacing="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Bezeichnung" Style="{StaticResource Title}"/>
+                        <TextBlock Text="{x:Bind Name}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock Text="Status" Style="{StaticResource Title}"/>
+                        <TextBlock Text="{x:Bind State}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+                </Grid>
+               
+                <StackPanel Grid.Row="2" Orientation="Vertical">
+                    <TextBlock Text="Informationen über das Arbeitsobjekt" Style="{StaticResource Title}"/>
+                    <TextBlock Text="{x:Bind InfoText}" Style="{StaticResource Info}"/>
+                </StackPanel>
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="DestPackageTemplate" x:DataType="dto:PackageDto">
+
+            <Grid MinWidth="500" RowSpacing="10" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Zielpackmittel" Style="{StaticResource Header}"/>
+                    <Border Background="{ThemeResource SystemControlBackgroundBaseLowBrush}" BorderThickness="0 0 0 2"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <TextBlock Text="Packmittel" Style="{StaticResource Title}"/>
+                    <TextBlock Text="{x:Bind PackageName}" Style="{StaticResource Info}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Vertical">
+                    <TextBlock Text="Füllung" Style="{StaticResource Title}"/>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <muxc:ProgressBar Maximum="{x:Bind Capacity}" Value="{x:Bind Amount}" Width="150"/>
+                        <TextBlock Text="{x:Bind Amount}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="SourcePackageTemp" x:DataType="dto:PackageDto">
+
+            <Grid Width="300" RowSpacing="10" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <StackPanel>
+                    <TextBlock Text="Quellpackmittel" Style="{StaticResource Header}"/>
+                    <Border Background="{ThemeResource SystemControlBackgroundBaseLowBrush}" BorderThickness="0 0 0 2"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <TextBlock Text="Packmittel" Style="{StaticResource Title}"/>
+                    <TextBlock Text="{x:Bind PackageName}" Style="{StaticResource Info}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Vertical">
+                    <TextBlock Text="Füllung" Style="{StaticResource Title}"/>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <muxc:ProgressBar Maximum="{x:Bind Capacity}" Value="{x:Bind Amount}" Width="150"/>
+                        <TextBlock Text="{x:Bind Amount}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="DocumentTemplate" x:DataType="dto:DocumentContainer">
+
+            <Grid RowSpacing="10" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="{Binding}" Style="{StaticResource Header}"/>
+                    <Border Background="{ThemeResource SystemControlBackgroundBaseLowBrush}" BorderThickness="0 0 0 2"/>
+                </StackPanel>
+            </Grid>
+
+        </DataTemplate>
+
+        <selec:WidgetDataTemplateSelector x:Key="widgetTemplateSelector"
+                                          WorkItem="{StaticResource WorkItemTemplate}"
+                                          DestinationPackage="{StaticResource DestPackageTemplate}"
+                                          SourcePackage="{StaticResource SourcePackageTemp}"
+                                          Documents="{StaticResource DocumentTemplate}"/>
+    </Page.Resources>
+
+    <Grid  x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer
+
+                IsVerticalScrollChainingEnabled="False"
+                Padding="0,0,16,0" 
+              >
+            <muxc:ItemsRepeater 
+                
+                ItemsSource="{Binding Widgets}"
+                ItemTemplate="{StaticResource widgetTemplateSelector}"
+                HorizontalAlignment="Stretch"
+                >
+                <muxc:ItemsRepeater.Layout>
+                    <layout:VariableGridSizeLayout RowSpacing="10" ColumnSpacing="5"/>
+                </muxc:ItemsRepeater.Layout>
+            </muxc:ItemsRepeater>
+        </ScrollViewer>
+
+        <muxc:SplitButton HorizontalAlignment="Center" Grid.Row="1" >
+            Füge Item hinzu
+            <muxc:SplitButton.Flyout>
+                <Flyout Placement="Bottom">
+                    <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3">
+                        <VariableSizedWrapGrid.Resources>
+                            <Style TargetType="Rectangle">
+                                <Setter Property="Width" Value="32"/>
+                                <Setter Property="Height" Value="32"/>
+                            </Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="MinWidth" Value="0"/>
+                                <Setter Property="MinHeight" Value="0"/>
+                                <Setter Property="Margin" Value="6"/>
+                            </Style>
+                        </VariableSizedWrapGrid.Resources>
+                        <Button Command="{Binding AddNewWorkItemCommand}" CommandParameter="" Content="Arbeitsobjekt" Width="Auto"/>
+                        <Button Command="{Binding AddDestPackagekItemCommand}" Content="DestPackage" Width="Auto"/>
+                        <Button Command="{Binding AddSrcNewWorkItem}" Content="SrcPackage" Width="Auto"/>
+                        <Button Command="{Binding AddNewDockItem}" Content="Document" Width="Auto"/>
+                        
+                        <Button AutomationProperties.Name="Red">
+                            <Button.Content>
+                                <Rectangle Fill="Red"/>
+                            </Button.Content>
+                        </Button>
+                      
+                    </VariableSizedWrapGrid>
+                </Flyout>
+            </muxc:SplitButton.Flyout>
+        </muxc:SplitButton>
+       
+    </Grid>
+</Page>
