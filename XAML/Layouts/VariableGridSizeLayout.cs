@@ -126,6 +126,11 @@ namespace WidgetLayout.XAML.Layouts
                     currentIndex++;
                 }
 
+                if (this.UnifedRowWidthLimit != 0 && this.UnifedRowWidthLimit > this.m_lastAvailableWidth)
+                {
+                    this.UnifyRowWidth(context, availableSize, this.UnifedRowWidthLimit);
+                }
+
                 this.cachedBoundsInvalid = false;
             }
 
